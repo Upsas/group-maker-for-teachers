@@ -33,7 +33,7 @@ fi
 
 for FILE in $STAGED_FILES
 do
-  ./application/vendor/bin/phpcs --standard=PSR12 "$FILE"
+  ./application/vendor/bin/phpcs --standard=PSR12 -n --ignore=/tests/* "$FILE"
   if [[ "$?" == 0 ]]; then
     echo -e "\033[42;30mPHPCS Passed: $FILE\033[0m"
   else
@@ -42,8 +42,8 @@ do
 	./application/vendor/bin/phpcbf --standard=PSR12 "$FILE"
 	if [[ "$?" == 1 ]]; then
 		echo -e "\033[32mPHPCBF Fixed: $FILE\033[0m"
-		PASS=FAILED
 	fi
+	PASS=FAILED
   fi
 done
 
