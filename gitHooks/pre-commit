@@ -1,0 +1,56 @@
+#!/bin/sh
+PHPUNIT=./application/vendor/bin/phpunit
+PHPCS = ./application/vendor/bin/phpcs
+
+if [ -f "$PHPUNIT" ]; then
+    echo "Running PHPUnit"
+	$PHPUNIT -c ./application/phpunit.xml
+	if [ $? = 1 ]; then
+	echo -e "\033[41mTests failed \033[0m"
+	exit 1
+	else
+		echo -e "\033[42;30m All tests Passed \033[0m"
+	fi
+else
+    echo -e "\033[41mPHPUnit: $PHPUNIT was not found \033[0m"
+	exit 1;
+fi
+
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep ".php\{0,1\}$")
+
+if [[ "$STAGED_FILES" = "" ]]; then
+	echo "No .php files was found";
+fi
+
+echo -e "\nValidating PHPCS:\n"
+
+# Check for phpcs
+which $PHPCS &> /dev/null
+if [[ "$?" == 1 ]]; then
+  echo -e "\033[41m;30mPlease install PHPCS\033[0m"
+  exit 1
+fi
+
+for FILE in $STAGED_FILES
+do
+  ./application/vendor/bin/phpcs --standard=PSR12 "$FILE"
+  if [[ "$?" == 0 ]]; then
+    echo -e "\033[42;30mPHPCS Passed: $FILE\033[0m"
+  else
+    echo -e "\033[41mPHPCS Failed: $FILE\033[0m"
+	echo -e "\033[47mPHPCBF TRYING TO FIX: $FILE\033[0m"
+	./application/vendor/bin/phpcbf --standard=PSR12 "$FILE"
+	if [[ "$?" == 1 ]]; then
+		echo -e "\033[32mPHPCBF Fixed: $FILE\033[0m"
+		PASS=FAILED
+	fi
+  fi
+done
+
+ if [[ $PASS == 'FAILED' ]]; then
+echo -e "\033[47m Re-run code with fixed styles\033[0m"
+exit 1
+else
+  echo -e "\033[42;30mCOMMIT SUCCEEDED\033[0m\n"
+fi
+exit $?
