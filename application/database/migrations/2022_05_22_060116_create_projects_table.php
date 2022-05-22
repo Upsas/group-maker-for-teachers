@@ -1,7 +1,5 @@
 <?php
 
-use App\Models\Role;
-use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,15 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('projects', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
-            $table->integer('role_id')->default(Role::ROLES[Role::ROLE_TEACHER]);
-            $table->foreign('role_id')->references('role_id')->on('roles');
+            $table->integer('groups');
+            $table->integer('students_per_group');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -36,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('projects');
     }
 };
