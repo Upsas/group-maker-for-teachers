@@ -897,6 +897,9 @@ select {
 .grid-cols-2 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
+.grid-rows-1 {
+  grid-template-rows: repeat(1, minmax(0, 1fr));
+}
 .flex-row {
   flex-direction: row;
 }
@@ -1570,6 +1573,14 @@ select {
     width: 50%;
   }
 
+  .sm\:w-3\/5 {
+    width: 60%;
+  }
+
+  .sm\:w-5\/12 {
+    width: 41.666667%;
+  }
+
   .sm\:max-w-md {
     max-width: 28rem;
   }
@@ -1580,6 +1591,10 @@ select {
 
   .sm\:flex-1 {
     flex: 1 1 0%;
+  }
+
+  .sm\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .sm\:flex-row {
@@ -1636,8 +1651,17 @@ select {
   .sm\:align-middle {
     vertical-align: middle;
   }
+
+  .sm\:text-base {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
 }
 @media (min-width: 768px) {
+
+  .md\:w-2\/5 {
+    width: 40%;
+  }
 
   .md\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1652,6 +1676,14 @@ select {
   }
 }
 @media (min-width: 1024px) {
+
+  .lg\:w-2\/5 {
+    width: 40%;
+  }
+
+  .lg\:w-5\/12 {
+    width: 41.666667%;
+  }
 
   .lg\:px-8 {
     padding-left: 2rem;
