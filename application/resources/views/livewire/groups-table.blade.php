@@ -1,4 +1,5 @@
-@for ($a = 0; $a < $project->groups; $a++)
+<div class="grid grid-rows-1 sm:grid-cols-2 lg:w-5/12">
+    @for ($a = 0; $a < $project->groups; $a++)
     @php
         $students = $project->groups()->first()?->students()->get()->toArray() ?? [];
         $groups = $project->groups()->get()->toArray()
@@ -48,3 +49,4 @@
         </div>
     </div>
 @endfor
+</div>
