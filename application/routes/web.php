@@ -17,7 +17,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [AuthenticatedSessionController::class, 'create'])->name('login');
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth'])->name('dashboard');
-Route::get('/project/{id}', [ProjectController::class, 'index'])->middleware(['auth'])->name('project');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/project/{id}', [ProjectController::class, 'index'])->name('project');
+    Route::post('/project/create', [ProjectController::class, 'create'])->name('project.create');
+});
 
 require __DIR__ . '/auth.php';

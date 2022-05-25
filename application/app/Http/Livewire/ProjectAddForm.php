@@ -10,6 +10,12 @@ use Livewire\Component;
 class ProjectAddForm extends Component
 {
     protected $listeners = ['test'];
+    public int $teacherId;
+
+    public function mount(int $teacherId)
+    {
+        $this->teacherId = $teacherId;
+    }
 
     public function render(): Factory|View|Application
     {

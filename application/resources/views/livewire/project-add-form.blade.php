@@ -14,14 +14,15 @@
                         <h1 class="my-3 text-3xl font-semibold text-gray-700">{{__('Add project')}}</h1>
                         <p class="text-gray-400 mb-3">{{__('Fill up the form below to add a project.')}}</p>
                     </div>
-                    <form action="" method="POST">
+                    <form action="{{route('project.create')}}" method="POST">
+                        @csrf
                         <div class="mb-6">
                             <label for="name" class="block mb-2 text-sm text-gray-600"
                             >{{__('Title')}}</label
                             >
                             <input
                                 type="text"
-                                name="title"
+                                name="name"
                                 placeholder="Egg drop project"
                                 required
                                 class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md  focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300"
@@ -29,12 +30,13 @@
                         </div>
                         <div class="flex flex-col sm:flex-row items-center mb-5 sm:space-x-5">
                             <div class="w-full sm:w-1/2">
-                                <label for="email" class="block mb-2 text-sm text-gray-600"
+                                <label for="groups" class="block mb-2 text-sm text-gray-600"
                                 >{{__('Groups number')}}</label
                                 >
                                 <input
                                     type="number"
                                     name="groups"
+                                    id="groups"
                                     placeholder="2"
                                     required
                                     class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md
@@ -42,10 +44,11 @@
                                 />
                             </div>
                             <div class="w-full sm:w-1/2 mt-2 sm:mt-0">
-                                <label for="email"
+                                <label for="students_per_group"
                                        class=" mb-2 text-sm text-gray-600">{{__('Students per group')}}</label>
                                 <input
                                     type="number"
+                                    id="students_per_group"
                                     name="students_per_group"
                                     placeholder="2"
                                     required
@@ -53,18 +56,19 @@
                                     focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300"
                                 />
                             </div>
+                            <input type="hidden" name="teacher_id" value="{{$teacherId}}">
                         </div>
-                    </form>
                 </div>
             </div>
             <div class="bg-gray-200 px-4 py-3 text-right">
                 <button type="button" class="py-2 px-4 bg-gray-500 text-white rounded hover:bg-gray-700 mr-2"
                         onclick="toggleModal()"><i class="fas fa-times"></i> Cancel
                 </button>
-                <button type="button" class="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-700 mr-2"><i
+                <button type="submit" class="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-700 mr-2"><i
                         class="fas fa-plus"></i> Create
                 </button>
             </div>
+            </form>
         </div>
     </div>
 </div>
