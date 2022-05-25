@@ -1,4 +1,8 @@
-@foreach($project->groups()->get() as $group)
+@for ($a = 0; $a < $project->groups; $a++)
+    @php
+        $students = $project->groups()->first()?->students()->get()->toArray() ?? [];
+        $groups = $project->groups()->get()->toArray()
+    @endphp
     <div class="w-full p-6 font-mono">
         <div class=" w-full mb-2 overflow-hidden rounded-lg shadow-lg">
             <div class="overflow-x-auto">
@@ -6,13 +10,12 @@
                     <thead>
                     <tr class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-300 uppercase
                     border-b border-gray-300">
-                        <th class="px-4 py-3 text-center sm:w-2/5">{{"Group #$group->group_index"}}</th>
+                        <th class="px-4 py-3 text-center sm:w-2/5">{{"Group #" }}{{array_key_exists($a, $groups) ?
+                        $groups[$a]['group_index'] : ''}}</th>
                     </tr>
                     </thead>
                     <tbody class="bg-white">
-                    @php
-                    $students = $group->students()->get()->toArray();
-                    @endphp
+
                     @for ($i = 0; $i < $project->students_per_group; $i++)
                         @if(array_key_exists($i, $students))
                         <tr class="text-gray-700">
@@ -44,4 +47,4 @@
             </div>
         </div>
     </div>
-@endforeach
+@endfor

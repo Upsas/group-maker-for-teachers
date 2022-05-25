@@ -147,6 +147,7 @@
             </div>
         </div>
     </div>
+    @livewire('project-add-form', [$teacherId])
 </nav>
 
 
