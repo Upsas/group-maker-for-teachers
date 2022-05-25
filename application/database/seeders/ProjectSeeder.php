@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Project;
+use App\Models\Student;
 use Illuminate\Database\Seeder;
 
 class ProjectSeeder extends Seeder
@@ -16,5 +17,10 @@ class ProjectSeeder extends Seeder
     public function run(): void
     {
         Project::factory(self::PROJECT_COUNT)->create();
+
+        foreach (Project::all() as $project) {
+            $students = Student::inRandomOrder()->take(rand(1, 3))->pluck('id');
+            $project->students()->attach($students);
+        }
     }
 }
