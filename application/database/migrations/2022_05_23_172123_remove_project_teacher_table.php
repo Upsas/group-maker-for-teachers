@@ -13,13 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('project_teacher', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('teacher_id')->constrained();
-            $table->foreignId('project_id')->constrained();
-            $table->timestamps();
-            $table->softDeletes();
-        });
+        Schema::dropIfExists('project_teacher');
     }
 
     /**
@@ -29,6 +23,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('project_teacher');
+        //
     }
 };

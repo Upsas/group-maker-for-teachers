@@ -17,9 +17,9 @@ class ProjectFactory extends Factory
     public function definition(): array
     {
         return [
-        'name' => $this->faker->sentence(2),
-        'groups' => $this->faker->numberBetween(3, 8),
-        'students_per_group' => $this->faker->numberBetween(2, 5),
-        ];
+            'name' => $this->faker->sentence(2),
+            'groups' => $this->faker->numberBetween(3, 8),
+            'students_per_group' => $this->faker->numberBetween(2, 5),
+            'teacher_id' => $this->faker->unique(true)->numberBetween(5, UserFactory::USER_COUNT)];
     }
 }

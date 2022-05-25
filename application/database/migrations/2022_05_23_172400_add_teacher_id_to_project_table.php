@@ -13,12 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('project_teacher', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('teacher_id')->constrained();
-            $table->foreignId('project_id')->constrained();
-            $table->timestamps();
-            $table->softDeletes();
+        Schema::table('projects', function (Blueprint $table) {
+            $table->unsignedBigInteger('teacher_id')->after('students_per_group');
+            $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade');
         });
     }
 
@@ -29,6 +26,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('project_teacher');
+        Schema::table('projects', function (Blueprint $table) {
+            $table->dropColumn('teacher_id');
+        });
     }
 };

@@ -18,7 +18,6 @@ class StudentFactory extends Factory
     {
         return [
             'full_name' => $this->faker->unique()->firstName() . ' ' . $this->faker->unique()->lastName(),
-            'teacher_id' => rand(1, UserFactory::USER_COUNT)
         ];
     }
 }

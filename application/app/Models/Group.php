@@ -5,13 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class Project extends Model
+class Group extends Model
 {
     use HasFactory;
-    use SoftDeletes;
 
     protected $guarded = [];
 
@@ -20,8 +18,8 @@ class Project extends Model
         return $this->belongsToMany(Student::class)->withTimestamps();
     }
 
-    public function groups(): HasMany
+    public function project(): HasOne
     {
-        return $this->hasMany(Group::class);
+        return $this->hasOne(Project::class, 'id', 'project_id');
     }
 }
