@@ -2,7 +2,7 @@
 PHPCS=./application/vendor/bin/phpcs
 
 commitId=$(git log -n1 --format="%h")
-STAGED_FILES=$(git diff-tree --no-commit-id --name-only -r $commitId | grep \.php$)
+STAGED_FILES=$(git diff-tree --no-commit-id --name-only -r $commitId | grep -v "\.blade.php$" | grep \.php$)
 
 if [[ "$STAGED_FILES" = "" ]]; then
 	echo "No .php files was found"

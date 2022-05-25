@@ -16,7 +16,7 @@ else
 	exit 1;
 fi
 
-STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep ".php\{0,1\}$")
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -v "\.blade.php$" | grep ".php\{0,1\}$")
 
 if [[ "$STAGED_FILES" = "" ]]; then
 	echo "No .php files was found";
