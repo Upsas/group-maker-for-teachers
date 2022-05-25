@@ -15,6 +15,7 @@
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
+        @livewireStyles
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
@@ -25,11 +26,13 @@
             </main>
 
         </div>
+        <script>
+            function toggleModal() {
+                document.getElementById('modal').classList.toggle('hidden')
+            }
+        </script>
+        @stack('js')
         @livewireScripts
     </body>
-    <script>
-        function toggleModal() {
-            document.getElementById('modal').classList.toggle('hidden')
-        }
-    </script>
+
 </html>
