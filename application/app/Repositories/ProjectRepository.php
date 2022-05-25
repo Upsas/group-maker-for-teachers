@@ -19,7 +19,7 @@ class ProjectRepository extends AbstractRepository
         $this->model = new Project();
     }
 
-    public function createProjectWithGroups(array $validatedData)
+    public function createProjectWithGroups(array $validatedData): Project
     {
 
         $storedProject = Project::create($validatedData);
@@ -27,5 +27,6 @@ class ProjectRepository extends AbstractRepository
         for ($i = 1; $i <= $validatedData['groups']; $i++) {
             Group::create(['group_index' => $i, 'project_id' => $storedProject->id]);
         }
+        return $storedProject;
     }
 }
