@@ -29,11 +29,4 @@ class ProjectController extends Controller
 
         return view('project-page', ['project' => $this->projectRepo->find($id)]);
     }
-
-    public function create(ProjectCreateRequest $request): RedirectResponse
-    {
-        $this->projectRepo->createProjectWithGroups($request->validated());
-
-        return back();
-    }
 }

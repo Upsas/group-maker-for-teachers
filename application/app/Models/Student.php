@@ -14,8 +14,13 @@ class Student extends Model
 
     protected $guarded = [];
 
+    public function projects(): BelongsToMany
+    {
+        return $this->belongsToMany(Project::class)->withTimestamps();
+    }
+
     public function groups(): BelongsToMany
     {
-        return $this->belongsToMany(Group::class);
+        return $this->belongsToMany(Group::class)->withTimestamps();
     }
 }

@@ -11,8 +11,10 @@
                 </tr>
                 </thead>
                 <tbody class="bg-white">
-
-                @forelse($project->students()->get() as $student)
+                @php
+                $paginatedStudents = $project->students()->paginate(10);
+                @endphp
+                @forelse($paginatedStudents as $student)
 
                     <tr class="text-gray-700">
                     <td class="px-4 py-3 border border-gray-300">
@@ -41,5 +43,14 @@
             </table>
         </div>
     </div>
-    <button class="mt-2 rounded-md bg-gray-300 px-3 py-1" type="button">{{__('Add new student')}}</button>
+    {{$paginatedStudents->links()}}
+
+        <button id="btn-add-student" type="button" class="bg-neutral-400 py-2 mt-2
+                text-gray-100  px-3
+                rounded-md hover:opacity-75"><span
+                class="pr-1px">&#10009;
+                    </span>{{__('Add new student')}}</button>
+
+    @livewire('add-student-form', [$project])
 </div>
+

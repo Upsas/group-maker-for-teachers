@@ -10,11 +10,18 @@ use Livewire\Component;
 
 class GroupsTable extends Component
 {
+    protected $listeners = ['renderGroupTables'];
+
     public Project $project;
 
     public function mount(Project $project): void
     {
         $this->project = $project;
+    }
+
+    public function renderGroupTables(): void
+    {
+        $this->render();
     }
 
     public function render(): Factory|View|Application

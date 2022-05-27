@@ -42,8 +42,8 @@ class ProjectAddForm extends Component
     {
         return [
             'name' => ['string', 'required', 'max:255'],
-            'groups' => ['numeric','max:999' ,'required'],
-            'students_per_group' => ['max:50', 'required', 'numeric'],
+            'groups' => ['numeric','max:999', 'gt:0', 'required'],
+            'students_per_group' => ['max:50', 'gt:0', 'required', 'numeric'],
             'teacher_id' => ['required', 'numeric', "in:$this->teacher_id"]
         ];
     }

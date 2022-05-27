@@ -25,22 +25,17 @@ abstract class AbstractRepository
      * @param string $operator
      * @return Builder
      */
-    public function where(string $columnName, string $value, string $operator = '='): Builder
+    public function where(string $columnName, string $value, string $operator = '='): Builder|null
     {
         return $this->model::where($columnName, $operator, $value);
     }
 
-    public function find(int $id): Model
+    public function find(int $id): Model|null
     {
         return $this->model::find($id);
     }
 
     public function create(array $validatedData)
-    {
-        return $this->model::create($validatedData);
-    }
-
-    public function createWithSync(array $validatedData)
     {
         return $this->model::create($validatedData);
     }
