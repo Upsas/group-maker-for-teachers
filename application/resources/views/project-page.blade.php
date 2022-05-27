@@ -1,5 +1,5 @@
 <x-app-layout>
-
+@livewire('flash-message')
 @if (session()->has('message'))
     <div id="flash-message" class="font-mono px-6 py-4 border-0  rounded-md relative w-5/12 mx-auto mt-6 mb-4
     bg-green-400">
