@@ -12,6 +12,8 @@ class ProjectInfoTable extends Component
 {
     public Project $project;
 
+    protected $listeners = ['refreshProjectInfoTable' => '$refresh'];
+
     public function mount(Project $project): void
     {
         $this->project = $project;

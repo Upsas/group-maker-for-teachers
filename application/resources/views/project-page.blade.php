@@ -36,5 +36,15 @@
             @livewire('groups-table', [$project])
 
     </div>
-
+    <script>
+        const refreshData = function() {
+            setTimeout(() => {
+                refreshData();
+                Livewire.emit('renderStudentTable');
+                Livewire.emit('refreshProjectInfoTable');
+                Livewire.emit('renderGroupTables');
+            }, 10000);
+        }
+        refreshData();
+    </script>
 </x-app-layout>
