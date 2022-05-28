@@ -1,5 +1,5 @@
 <div id="flash-message-livewire" class="font-mono px-6 py-4 border-0  rounded-md relative w-5/12 mx-auto mt-6 mb-4
-    bg-green-400 {{$flashMessageDisplay}}">
+    {{$bgColor}} {{$flashMessageDisplay}}">
         <span class="inline-block align-middle mr-4">
     {{$message}}
   </span>

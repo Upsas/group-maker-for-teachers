@@ -10,26 +10,27 @@
                     <th class="px-4 py-3 sm:w-1/5">{{__('Action')}}</th>
                 </tr>
                 </thead>
-                <tbody class="bg-white">
+                <tbody class="bg-white text-md">
                 @php
                 $paginatedStudents = $project->students()->paginate(10);
                 @endphp
                 @forelse($paginatedStudents as $student)
 
                     <tr class="text-gray-700">
-                    <td class="px-4 py-3 border border-gray-300">
+                    <td class="px-4 py-2 border border-gray-300">
                         <div>
                             <p class="font-semibold text-black">{{$student->full_name}}</p>
                         </div>
                     </td>
 
-                    <td class="px-4 py-3 text-ms font-semibold border border-gray-300">
+                    <td class="px-4 py-2 text-ms font-semibold border border-gray-300">
                         {{($student->groups()->where('project_id', $project->id)->first() !== null) ? "Group #" . $student->groups()->first()
                         ->group_index : '-' }}
                         </td>
 
-                    <td class="px-4 py-3 text-ms font-semibold border border-gray-300">
-                        Delete
+                    <td class="px-4 py-2 text-ms font-semibold border border-gray-300">
+                       <button class="text-ms font-semibold font-mono"
+                               type="button" wire:click="$emit('openDeleteModal', {{$student->id}})"> Delete</button>
                     </td>
                 </tr>
                 @empty
@@ -50,7 +51,7 @@
                 rounded-md hover:opacity-75"><span
                 class="pr-1px">&#10009;
                     </span>{{__('Add new student')}}</button>
-
+    @livewire('delete-modal')
     @livewire('add-student-form', [$project])
 </div>
 
