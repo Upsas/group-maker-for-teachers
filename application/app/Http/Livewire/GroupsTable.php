@@ -15,10 +15,12 @@ class GroupsTable extends Component
 
     public Project $project;
     public $selectedStudent = '';
+    public $allStudents;
 
     public function mount(Project $project): void
     {
         $this->project = $project;
+        $this->allStudents = $project->students()->get();
     }
 
     public function selected(int $currentGroupId, StudentRepository $studentRepo): void
@@ -31,7 +33,15 @@ class GroupsTable extends Component
         } else {
             $studentGroups->sync($currentGroupId);
         }
+
         $this->reset('selectedStudent');
+        $this->emit('renderStudentTable');
+    }
+
+    public function unselect(string $studentFullName, int $currentGroupId, StudentRepository $studentRepo)
+    {
+        $student = $studentRepo->where('full_name', $studentFullName)->first();
+        $student->groups()->detach($currentGroupId);
         $this->emit('renderStudentTable');
     }
 
