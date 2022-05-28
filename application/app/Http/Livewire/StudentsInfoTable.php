@@ -13,18 +13,13 @@ class StudentsInfoTable extends Component
 {
     use WithPagination;
 
-    protected $listeners = ['renderStudentTable'];
+    protected $listeners = ['renderStudentTable' => '$refresh'];
 
     public Project $project;
 
     public function mount(Project $project): void
     {
         $this->project = $project;
-    }
-
-    public function renderStudentTable(): void
-    {
-        $this->render();
     }
 
     public function render(): Factory|View|Application
