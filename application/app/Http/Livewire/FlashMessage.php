@@ -15,10 +15,11 @@ class FlashMessage extends Component
 
     protected $listeners = ['renderFlashMessage'];
 
-    public function renderFlashMessage($message)
+    public function renderFlashMessage($message, $bgColor = 'bg-green-400')
     {
         $this->flashMessageDisplay = 'block';
         $this->message = $message;
+        $this->bgColor = $bgColor;
         $this->dispatchBrowserEvent('renderFlashMessage');
     }
 

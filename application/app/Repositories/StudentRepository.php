@@ -14,10 +14,21 @@ class StudentRepository extends AbstractRepository
         $this->model = new Student();
     }
 
+    public function delete(int $id)
+    {
+        $model = $this->find($id);
+        $model->groups()->detach();
+        $model->projects()->detach();
+        $model->delete();
+    }
+
     public function createStudentWithProject(array $validatedData): Student|Model
     {
         $fullName = $validatedData['full_name'];
-        $student = $this->where('full_name', $fullName)->first();
+        $student = $this->where('full_name', $fullName)->withTrashed()->first();
+        if ($student?->trashed()) {
+            $student->restore();
+        }
 
 //        If student doesn't exist create new and attach to project
         if (!$student) {
@@ -25,6 +36,7 @@ class StudentRepository extends AbstractRepository
             $createdModel->projects()->attach($validatedData['project_id']);
             return $createdModel;
         }
+
 //        Else attach student to project
         $student->projects()->attach($validatedData['project_id']);
         return $student;

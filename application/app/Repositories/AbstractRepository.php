@@ -35,8 +35,13 @@ abstract class AbstractRepository
         return $this->model::find($id);
     }
 
-    public function create(array $validatedData)
+    public function create(array $validatedData): Model
     {
         return $this->model::create($validatedData);
+    }
+
+    public function delete(int $id)
+    {
+        $this->find($id)->delete();
     }
 }
