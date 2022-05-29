@@ -52,7 +52,7 @@ class AddStudentForm extends Component
         return Http::acceptJson()->withToken((Auth::user())
             ->createToken('sanctumValidationToken')->plainTextToken)
             ->asForm()
-            ->post('http://192.168.0.175/api/student/store', [
+            ->post(route('student.store-api'), [
                 'project_id' => $this->project->id,
                 'full_name' => $this->full_name,
             ]);
