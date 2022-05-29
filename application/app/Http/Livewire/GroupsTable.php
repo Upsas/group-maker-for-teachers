@@ -48,7 +48,7 @@ class GroupsTable extends Component
     public function render(): Factory|View|Application
     {
         $groups = $this->project->groups()->get();
-        $allStudents = $this->project->students();
-        return view('livewire.groups-table', ['groups' => $groups, 'allStudents' => $allStudents]);
+        $this->allStudents = $this->project->students()->get();
+        return view('livewire.groups-table', ['groups' => $groups]);
     }
 }
