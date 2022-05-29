@@ -1,0 +1,3 @@
+@import '../../application/node_modules/tailwindcss/base.css';
+@import '../../application/node_modules/tailwindcss/components.css';
+@import '../../application/node_modules/tailwindcss/utilities.css';
