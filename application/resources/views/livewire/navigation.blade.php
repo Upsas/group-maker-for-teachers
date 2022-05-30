@@ -135,7 +135,7 @@
 
                         <x-slot name="content">
                             @forelse($teacher->projects()->get() as $project)
-                                <x-dropdown-link>
+                                <x-dropdown-link href="{{route('project', $project->id)}}">
                                     {{ $project->name }}
                                 </x-dropdown-link>
                             @empty
