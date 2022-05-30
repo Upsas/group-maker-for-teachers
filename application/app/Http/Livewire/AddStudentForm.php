@@ -48,12 +48,17 @@ class AddStudentForm extends Component
 
     private function storeAPIRequest(): PromiseInterface|Response
     {
+        $apiIPAddress = env('API_IP_ADDRESS');
+
+        $route = route('student.store-api');
+
+        if ($apiIPAddress) {
+            $route = "http://$apiIPAddress/api/student/store";
+        }
+
         return Http::acceptJson()->withToken((Auth::user())
             ->createToken('sanctumValidationToken')->plainTextToken)
             ->asForm()
-            ->post(env('API_IP_ADDRESS', route('student.store-api')), [
-                'project_id' => $this->project->id,
-                'full_name' => $this->full_name,
-            ]);
+            ->post($route, ['project_id' => $this->project->id, 'full_name' => $this->full_name]);
     }
 }
